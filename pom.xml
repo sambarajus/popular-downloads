@@ -78,4 +78,13 @@
 
 
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>libs-release-local</id>
+            <name>libs-release-local</name>
+            <url>http://35.224.254.203:8083/artifactory/libs-release-local</url>
+        </repository>
+    </distributionManagement>
+
+
 </project>

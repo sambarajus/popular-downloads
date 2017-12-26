@@ -3,6 +3,7 @@ package com.ssk.challenge.jgrog;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -38,8 +40,9 @@ public class ArtifactServiceTest {
         when(apiInvoker.getArtifacts(anyString())).thenReturn(getArtifacts());
         when(apiInvoker.getArtifactStatistics(arg.capture(), arg.capture(), arg.capture())).thenAnswer((InvocationOnMock invocation) -> getArtifactStatistics((String) invocation.getArguments()[2]));
         List<Artifact> popularDownloads = artifactService.getPopularDownloads(2, "generic-local");
-        System.out.println("Popular Downloads::::");
-        popularDownloads.forEach(artifact -> System.out.println(artifact));
+        Assert.assertNotNull(popularDownloads);
+        assertEquals("multi3-2.war", popularDownloads.get(0).getName() );
+        assertEquals("multi3-4.war", popularDownloads.get(1).getName() );
     }
 
     //Helper methods to fetch listOfArtifacts can be replaced with Rest API call.
@@ -52,7 +55,6 @@ public class ArtifactServiceTest {
     //Helper method to fetch statistics.. can be replaced with Rest API call.
     private JsonNode getArtifactStatistics(String artifactName) throws Exception {
         Map<String, String> statsmap = new HashMap();
-        System.out.println(artifactName);
         statsmap.put("multi3-1.war", "{\"uri\":\"http://35.224.254.203:8083/artifactory/generic-local/multi3-1.war\",\"downloadCount\":5,\"lastDownloaded\":0,\"remoteDownloadCount\":0,\"remoteLastDownloaded\":0}");
         statsmap.put("multi3-2.war", "{\"uri\":\"http://35.224.254.203:8083/artifactory/generic-local/multi3-2.war\",\"downloadCount\":15,\"lastDownloaded\":0,\"remoteDownloadCount\":0,\"remoteLastDownloaded\":0}");
         statsmap.put("multi3-3.war", "{\"uri\":\"http://35.224.254.203:8083/artifactory/generic-local/multi3-3.war\",\"downloadCount\":10,\"lastDownloaded\":0,\"remoteDownloadCount\":0,\"remoteLastDownloaded\":0}");
