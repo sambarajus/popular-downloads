@@ -40,11 +40,6 @@
             <version>2.9.2</version>
         </dependency>
         <dependency>
-            <groupId>com.ssk.challenge.jgrog</groupId>
-            <artifactId>popular-downloads</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
